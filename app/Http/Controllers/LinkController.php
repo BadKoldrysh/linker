@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveLinkRequest;
+use App\Models\Link;
+use App\Services\LinkGeneratorInterface;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,11 +15,13 @@ class LinkController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getLink(SaveLinkRequest $saveLinkRequest): Response
+    public function getLink(SaveLinkRequest $saveLinkRequest, LinkGeneratorInterface $linkGenerator): Response
     {
+        $link = Link::query()->create([
+            'old_url' => $saveLinkRequest->get('url'),
+            'new_url' => $linkGenerator->generate(),
+        ]);
 
-        dd($saveLinkRequest->all());
-
-        return new Response('hello world');
+        return new Response($link);
     }
 }
