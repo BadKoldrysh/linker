@@ -2,25 +2,23 @@
 
 namespace App\Services\LinkGenerator;
 
+use App\Services\HashGenerator\HashGenerator;
 use App\Services\LinkGeneratorInterface;
-use Illuminate\Support\Str;
 
 class LinkGenerator implements LinkGeneratorInterface
 {
     /**
-     * Tail length
-     *
-     * @var int
+     * @var HashGenerator
      */
-    private $tailLength;
+    private $hashGenerator;
 
-    public function __construct(int $length)
+    public function __construct(HashGenerator $hashGenerator)
     {
-        $this->tailLength = $length;
+        $this->hashGenerator = $hashGenerator;
     }
 
     public function generate(): string
     {
-        return Str::random($this->tailLength);
+        return $this->hashGenerator->generate();
     }
 }
