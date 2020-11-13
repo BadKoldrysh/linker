@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RedirectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{hash}', [RedirectController::class, 'redirectTo'])
+    ->where('hash', '[0-9A-Za-z]{' . config('generator.url_tail_length') . '}');

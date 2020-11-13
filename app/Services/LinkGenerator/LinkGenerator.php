@@ -22,6 +22,6 @@ class LinkGenerator implements LinkGeneratorInterface
         $hash = $this->hashGenerator->generate();
         $base = url("/");
 
-        return sprintf("%s/%s/", $base, $hash);
+        return sprintf("%s/%s", $base, $hash);
     }
 }
