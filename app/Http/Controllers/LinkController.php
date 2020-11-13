@@ -17,8 +17,10 @@ class LinkController extends BaseController
 
     public function getLink(SaveLinkRequest $saveLinkRequest, LinkGeneratorInterface $linkGenerator): Response
     {
+        $oldUrl = $saveLinkRequest->get('url');
+
         $link = Link::query()->create([
-            'old_url' => $saveLinkRequest->get('url'),
+            'old_url' => $oldUrl,
             'new_url' => $linkGenerator->generate(),
         ]);
 
