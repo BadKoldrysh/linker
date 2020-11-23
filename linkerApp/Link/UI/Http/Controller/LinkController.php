@@ -2,25 +2,25 @@
 
 namespace Linker\Link\UI\Http\Controller;
 
+use App\Http\Responses\JsonOkResponse;
 use Linker\Link\Application\Service\LinkService;
 use Linker\Link\UI\Http\Request\SaveLinkRequest;
-use App\Models\Link;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Linker\Link\UI\Http\Resource\LinkResource;
 
 class LinkController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getLink(SaveLinkRequest $saveLinkRequest, LinkService $service): Response
+    public function getLink(SaveLinkRequest $saveLinkRequest, LinkService $service): JsonOkResponse
     {
-        $oldUrl = $saveLinkRequest->get('url');
+        $oldUrl = $saveLinkRequest->getUrl();
 
         $link = $service->make($oldUrl);
 
-        return new Response($link);
+        return new JsonOkResponse(new LinkResource($link));
     }
 }

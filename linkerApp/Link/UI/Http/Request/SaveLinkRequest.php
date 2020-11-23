@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Linker\Link\UI\Http\Request;
 
@@ -10,15 +12,17 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SaveLinkRequest extends FormRequest
 {
-    public function authorize()
+    private const URL = 'url';
+
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
-            'url' => [
+            self::URL => [
                 'required',
                 'min:7',
                 'max:3000',
@@ -27,7 +31,12 @@ class SaveLinkRequest extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    public function getUrl(): string
+    {
+        return $this->validated()[self::URL];
+    }
+
+    protected function failedValidation(Validator $validator): void
     {
         $errors = (new ValidationException($validator))->errors();
 

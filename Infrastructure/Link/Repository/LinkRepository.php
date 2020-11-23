@@ -10,10 +10,13 @@ class LinkRepository implements LinkRepositoryInterface
 {
     public function create(LinkEntity $link): void
     {
-        Link::query()
+        /** @var Link $model */
+        $model = Link::query()
             ->create([
                 'old_url' => $link->getOldUrl(),
                 'new_url' => $link->getNewUrl(),
             ]);
+
+        $link->setId($model->getId());
     }
 }
