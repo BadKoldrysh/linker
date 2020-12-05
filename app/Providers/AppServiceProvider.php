@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\LinkGenerator\LinkGenerator;
-use App\Services\LinkGeneratorInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,9 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(LinkGeneratorInterface::class, function() {
-            return new LinkGenerator(config('generator.url_tail_length'));
-        });
     }
 
     /**
