@@ -21,7 +21,7 @@ class RedirectController extends BaseController
         /** @var Link $linkTo */
         $linkTo = Link::query()
             ->select()
-            ->where('new_url', '=', $hash)
+            ->where('hash', '=', $hash)
             ->first();
 
         return Redirect::to($linkTo->getOldUrl());

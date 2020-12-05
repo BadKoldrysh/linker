@@ -19,7 +19,7 @@ class LinkController extends BaseController
     {
         $link = Link::query()->create([
             'old_url' => $saveLinkRequest->get('url'),
-            'new_url' => $linkGenerator->generate(),
+            'hash' => $linkGenerator->generate(),
         ]);
 
         return new Response($link);

@@ -14,7 +14,7 @@ class LinkRepository implements LinkRepositoryInterface
         $model = Link::query()
             ->create([
                 'old_url' => $link->getOldUrl(),
-                'new_url' => $link->getNewUrl(),
+                'hash' => $link->getHash(),
             ]);
 
         $link->setId($model->getId());

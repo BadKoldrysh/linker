@@ -9,13 +9,13 @@ class LinkView
     /** @var string $oldUrl */
     private $oldUrl;
 
-    /** @var string $newUrl */
-    private $newUrl;
+    /** @var string $hash */
+    private $hash;
 
-    public function __construct(string $oldUrl, string $newUrl)
+    public function __construct(string $oldUrl, string $hash)
     {
         $this->oldUrl = $oldUrl;
-        $this->newUrl = $newUrl;
+        $this->hash = $hash;
     }
 
     public function getOldUrl(): string
@@ -23,8 +23,8 @@ class LinkView
         return $this->oldUrl;
     }
 
-    public function getNewUrl(): string
+    public function getHash(): string
     {
-        return $this->newUrl;
+        return $this->hash;
     }
 }

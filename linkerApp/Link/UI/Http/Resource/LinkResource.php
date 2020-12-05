@@ -19,7 +19,7 @@ class LinkResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'newUrl' => $this->resource->getNewUrl(),
+            'hash' => $this->resource->getHash(),
         ];
     }
 }

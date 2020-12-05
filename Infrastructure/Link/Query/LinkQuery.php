@@ -23,7 +23,7 @@ class LinkQuery implements LinkQueryInterface
         $model = Link::query()->find($id);
 
         if ($model instanceof Link) {
-            return new LinkView($model->getOldUrl(), $this->linkGenerator->getRoute($model->getNewUrl()));
+            return new LinkView($model->getOldUrl(), $this->linkGenerator->getRoute($model->getHash()));
         }
 
         return null;

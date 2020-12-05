@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $id
  * @property string $old_url
- * @property string $new_url
+ * @property string $hash
  */
 class Link extends Model
 {
@@ -21,9 +21,9 @@ class Link extends Model
         return $this->old_url;
     }
 
-    public function getNewUrl(): string
+    public function getHash(): string
     {
-        return $this->new_url;
+        return $this->hash;
     }
     /**
      * The attributes that are mass assignable.
@@ -32,7 +32,7 @@ class Link extends Model
      */
     protected $fillable = [
         'old_url',
-        'new_url',
+        'hash',
         'user_id',
     ];
 }

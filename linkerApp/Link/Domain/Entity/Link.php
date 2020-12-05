@@ -6,12 +6,12 @@ class Link
 {
     private $id;
     private $oldUrl;
-    private $newUrl;
+    private $hash;
 
-    public function __construct(string $oldUrl, string $newUrl, ?int $id = null)
+    public function __construct(string $oldUrl, string $hash, ?int $id = null)
     {
         $this->oldUrl = $oldUrl;
-        $this->newUrl = $newUrl;
+        $this->hash = $hash;
         $this->id = $id;
     }
 
@@ -30,9 +30,9 @@ class Link
         return $this->oldUrl;
     }
 
-    public function getNewUrl(): string
+    public function getHash(): string
     {
-        return $this->newUrl;
+        return $this->hash;
     }
 
     public function setOldUrl(string $oldUrl): void
@@ -40,8 +40,8 @@ class Link
         $this->oldUrl = $oldUrl;
     }
 
-    public function setNewUrl(string $newUrl): void
+    public function setHash(string $hash): void
     {
-        $this->newUrl = $newUrl;
+        $this->hash = $hash;
     }
 }

@@ -13,7 +13,7 @@ class Link extends Model
      */
     protected $fillable = [
         'old_url',
-        'new_url',
+        'hash',
         'user_id',
     ];
 }

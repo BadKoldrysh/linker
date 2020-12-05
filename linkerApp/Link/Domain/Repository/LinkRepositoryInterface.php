@@ -7,6 +7,4 @@ use Linker\Link\Domain\Entity\Link;
 interface LinkRepositoryInterface
 {
     public function create(Link $link): void;
-
-//    public function getByNewUrl(string $newUrl): ?Link;
 }
