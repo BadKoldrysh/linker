@@ -25,7 +25,11 @@ class LinkService
 
     public function make(string $oldUrl): LinkView
     {
-        $link = new Link($oldUrl, $this->hashGenerator->generate());
+        do {
+            $hash = $this->hashGenerator->generate();
+        } while (!$this->repository->isHashUnique($hash));
+
+        $link = new Link($oldUrl, $hash);
 
         $this->repository->create($link);
 
