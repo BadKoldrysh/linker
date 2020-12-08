@@ -19,4 +19,9 @@ class LinkRepository implements LinkRepositoryInterface
 
         $link->setId($model->getId());
     }
+
+    public function doesHashExist(string $hash): bool
+    {
+        return Link::whereHash($hash)->exists();
+    }
 }

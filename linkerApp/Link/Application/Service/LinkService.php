@@ -25,10 +25,19 @@ class LinkService
 
     public function make(string $oldUrl): LinkView
     {
-        $link = new Link($oldUrl, $this->hashGenerator->generate());
+        do {
+            $hash = $this->hashGenerator->generate();
+        } while ($this->repository->doesHashExist($hash));
+
+        $link = new Link($oldUrl, $hash);
 
         $this->repository->create($link);
 
         return $this->linkQuery->getOneById($link->getId());
+    }
+
+    public function getOneByHash(string $hash): ?LinkView
+    {
+        return $this->linkQuery->getOneByHash($hash);
     }
 }

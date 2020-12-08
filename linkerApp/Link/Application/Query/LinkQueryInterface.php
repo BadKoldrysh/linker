@@ -7,4 +7,5 @@ namespace Linker\Link\Application\Query;
 interface LinkQueryInterface
 {
     public function getOneById(int $id): ?LinkView;
+    public function getOneByHash(string $hash): ?LinkView;
 }

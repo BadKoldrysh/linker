@@ -16,7 +16,7 @@ class CreateLinksTable extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->id();
             $table->string('old_url', 3000);
-            $table->string('hash');
+            $table->string('hash')->unique();
             $table->integer('user_id')->nullable(true);
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
