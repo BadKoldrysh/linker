@@ -28,4 +28,15 @@ class LinkQuery implements LinkQueryInterface
 
         return null;
     }
+
+    public function getOneByHash(string $hash): ?LinkView
+    {
+        $model = Link::whereHash($hash)->first();
+
+        if ($model instanceof Link) {
+            return new LinkView($model->getOldUrl(), $this->linkGenerator->getRoute($model->getHash()));
+        }
+
+        return null;
+    }
 }

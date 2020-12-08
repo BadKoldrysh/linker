@@ -21,6 +21,13 @@
         </style>
     </head>
     <body class="antialiased">
+        <div class="flash-message">
+            @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }}</p>
+                @endif
+            @endforeach
+        </div>
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

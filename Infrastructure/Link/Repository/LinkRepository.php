@@ -20,13 +20,8 @@ class LinkRepository implements LinkRepositoryInterface
         $link->setId($model->getId());
     }
 
-    public function isHashUnique(string $hash): bool
+    public function doesHashExist(string $hash): bool
     {
-        $link = Link::query()
-            ->select()
-            ->where('hash', '=', $hash)
-            ->first();
-
-        return is_null($link);
+        return Link::whereHash($hash)->exists();
     }
 }

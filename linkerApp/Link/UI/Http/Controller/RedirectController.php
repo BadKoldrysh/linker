@@ -10,20 +10,26 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Redirect;
-use Infrastructure\Link\Model\Link;
+use Linker\Link\Application\Service\LinkService;
 
 class RedirectController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    private $linkService;
+
+    public function __construct(LinkService $linkService)
+    {
+        $this->linkService = $linkService;
+    }
+
     public function redirectTo(string $hash): RedirectResponse
     {
-        /** @var Link $linkTo */
-        $linkTo = Link::query()
-            ->select()
-            ->where('hash', '=', $hash)
-            ->first();
+        $linkTo = $this->linkService->getOneByHash($hash);
 
+        if (is_null($linkTo)) {
+            return Redirect::back()->with('errors', ['This link was not found']);
+        }
         return Redirect::to($linkTo->getOldUrl());
     }
 }
